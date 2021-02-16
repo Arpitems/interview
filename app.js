@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
   setInterval(() => {
     Test();
     console.log("Hello");
-  }, 200000);
+  }, 2000);
 });
 
 async function Test() {
