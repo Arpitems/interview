@@ -81,23 +81,18 @@ async function Test() {
     family: 4 // Use IPv4, skip trying IPv6
   };
 
-
-async function DB(){
-await mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true, 
-    useFindAndModify: false,
-    useCreateIndex: true,
-    connectTimeoutMS: 1000
-  })
+  // {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true, 
+  //   useFindAndModify: false,
+  //   useCreateIndex: true,
+  //   connectTimeoutMS: 1000
+  // }
+ mongoose
+  .connect(process.env.MONGO_URL,options)
   .then(() => {
     console.log("mongo connected");
   }); 
-// },10);
-}
-
-DB()
 
 http.listen(process.env.PORT, () => {
   console.log("server started at ", process.env.PORT);
