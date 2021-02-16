@@ -4,9 +4,9 @@
 <body>
   <div id="message"></div>
 
-  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
   <script>
-    var socket = io();
+    var socket = io('http://localhost:4000');
 
     socket.on('message', function(msg){
       console.log(msg);
