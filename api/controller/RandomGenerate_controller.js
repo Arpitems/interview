@@ -5,9 +5,9 @@ let { Random_Generate } = require("../helper/commonhelper");
 // --------------------- Show_RandomGenerate ---------------------
 module.exports.Show_RandomGenerate = async (req, res) => {
   try {
-    let { pagination, page,sortTime,sortType,search } = req.body;
-    const paginationS = pagination ? parseInt(pagination) : 10;
-    const pageS = page ? parseInt(page) : 1;
+    let { recordPerPage, pageNumber,sortTime,sortType,search } = req.body;
+    const paginationS = recordPerPage ? parseInt(recordPerPage) : 10;
+    const pageS = pageNumber ? parseInt(pageNumber) : 1;
     let dataDetail = await randomModel
       .find({ generateRandom:{ 
         $regex: search,
