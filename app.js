@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
   setInterval(() => {
     Test();
     console.log("Hello");
-  }, 3000);
+  }, 200000);
 });
 
 async function Test() {
@@ -71,14 +71,14 @@ async function Test() {
 
   const options = {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    autoIndex: false, // Don't build indexes
-    poolSize: 500, // Maintain up to 10 socket connections
-    serverSelectionTimeoutMS: 50000, // Keep trying to send operations for 5 seconds
-    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-    family: 4 // Use IPv4, skip trying IPv6
+    // useUnifiedTopology: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+    // autoIndex: false, // Don't build indexes
+    // poolSize: 500, // Maintain up to 10 socket connections
+    // serverSelectionTimeoutMS: 50000, // Keep trying to send operations for 5 seconds
+    // socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+    // family: 4 // Use IPv4, skip trying IPv6
   };
 
   // {
@@ -93,10 +93,6 @@ async function Test() {
   .then(() => {
     console.log("mongo connected");
   }); 
-
-
-
-
 
 http.listen(process.env.PORT, () => {
   console.log("server started at ", process.env.PORT);
