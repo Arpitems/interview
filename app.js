@@ -45,18 +45,19 @@ async function Test() {
 }
 
 // test
-setTimeout(function() {
+// setTimeout(function() {
   mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true, 
     useFindAndModify: false,
     useCreateIndex: true,
+    connectTimeoutMS: 1000
   })
   .then(() => {
     console.log("mongo connected");
   }); 
-},10);
+// },10);
 
 
 http.listen(process.env.PORT, () => {
