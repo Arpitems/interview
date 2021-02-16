@@ -106,7 +106,7 @@ mongoose.connection.on('error', (err)=>{
 
   setTimeout( () => {
           mongoose.connect(mongoConnectionString, options);
-  }, 5000);
+  }, 10000);
 });
 
 
