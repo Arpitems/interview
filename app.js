@@ -43,10 +43,11 @@ async function Test() {
   });
   await random.save();
 }
-
+DB()
 // test
 // setTimeout(function() {
-  mongoose
+async function DB(){
+await mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true, 
@@ -58,7 +59,7 @@ async function Test() {
     console.log("mongo connected");
   }); 
 // },10);
-
+}
 
 http.listen(process.env.PORT, () => {
   console.log("server started at ", process.env.PORT);
