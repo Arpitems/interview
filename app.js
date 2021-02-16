@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 
 app.use("/api", apiRouter);
 
-app.get("/", function (req, res) {
+app.get("/Test", function (req, res) {
   res.sendFile("index.html");
 });
 
