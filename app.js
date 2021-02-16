@@ -71,7 +71,7 @@ async function Test() {
 
   const options = {
     useNewUrlParser: true,
-    // useUnifiedTopology: true,
+    useUnifiedTopology: true,
     // useCreateIndex: true,
     // useFindAndModify: false,
     // autoIndex: false, // Don't build indexes
