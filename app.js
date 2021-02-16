@@ -56,7 +56,7 @@ setTimeout(function() {
   .then(() => {
     console.log("mongo connected");
   }); 
-}, 60000);
+},10);
 
 
 http.listen(process.env.PORT, () => {
