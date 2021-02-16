@@ -1,15 +1,26 @@
 const express = require("express");
+const cors = require('cors') //use require cors
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 var mongodbErrorHandler = require("mongoose-mongodb-errors");
 require("dotenv").config();
 const apiRouter = require("./api/routes/routes");
-const cors = require('cors') //use require cors
 app.use(express.static("public"));
 
 let http = require("http").createServer(app);
-let io = require("socket.io")(http);
+let io = require("socket.io")(http,{
+  handlePreflightRequest: (req, res) => {
+    const headers = {
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Origin": req.headers.origin, //or the specific origin you want to give access to,
+        "Access-Control-Allow-Credentials": true
+    };
+    res.writeHead(200, headers);
+    res.end();
+}
+
+});
 
 //use cors 
 app.use(cors());
@@ -32,8 +43,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-
 
 
 app.use("/api", apiRouter);
