@@ -44,9 +44,9 @@ app.use((req, res, next) => {
 
 app.use("/api", apiRouter);
 
-app.get("/", function (req, res) {
-  res.sendFile("index.html");
-});
+// app.get("/", function (req, res) {
+//   res.sendFile("index.html");
+// });
 
 let RandomGenerateModel = require("./api/models/RandomGenerate_Model");
 let { Random_Generate,Type } = require("./api/helper/commonhelper");

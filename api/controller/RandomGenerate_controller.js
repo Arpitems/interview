@@ -18,8 +18,8 @@ module.exports.Show_RandomGenerate = async (req, res) => {
       success: true,
       message: "Data show successfully",
       data: dataDetail,
-      recordPerPage,
-      pageNumber
+      recordPerPage:recordPerPage,
+      pageNumber:pageNumber
     });
   } catch (err) {
     console.log(err);
