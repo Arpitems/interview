@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
   setInterval(() => {
     randomSave();
     console.log("Hello");
-  }, 2000);
+  }, 200000);
 });
 
 async function randomSave() {
