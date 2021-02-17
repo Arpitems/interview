@@ -9,7 +9,15 @@ const apiRouter = require("./api/routes/routes");
 app.use(express.static("public"));
 
 let http = require("http").createServer(app);
-let io = require("socket.io")(http, { cors: { origin: '*' } });
+let io = require("socket.io")(http, { 
+  cors: {
+    origin: "http://localhost:4000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Access-Control-Allow-Origin","*","Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization",],
+    credentials: true
+  }
+});
 
 //use cors 
 app.use(cors());
