@@ -11,7 +11,7 @@ app.use(express.static("public"));
 let http = require("http").createServer(app);
 let io = require("socket.io")(http, { 
   cors: {
-    origin: ["http://localhost","http://localhost:4200", "http://127.0.0.1:5501"],
+    origin: ["http://65.1.3.88:4000","http://localhost","http://localhost:4200", "http://127.0.0.1:5501"],
     methods: ["GET", "POST"],
     allowedHeaders: ["Access-Control-Allow-Origin","*","Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"],
