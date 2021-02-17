@@ -6,6 +6,7 @@ let { Random_Generate } = require("../helper/commonhelper");
 module.exports.Show_RandomGenerate = async (req, res) => {
   try {
     let { recordPerPage, pageNumber,sortTime,sortType,search } = req.body;
+    console.log(sortTime,sortType);
     const paginationS = recordPerPage ? parseInt(recordPerPage) : 10;
     const pageS = pageNumber ? parseInt(pageNumber) : 1;
     let dataDetail = await randomModel
@@ -13,12 +14,12 @@ module.exports.Show_RandomGenerate = async (req, res) => {
         $regex: search,
         $options: "$i"
         }   }).skip((pageS - 1) * paginationS)
-      .limit(paginationS).sort( { updatedAt : sortTime ,type:sortType });;
+      .limit(paginationS).sort( { sortTime:sortType });;
       res.json({
       success: true,
       message: "Data show successfully",
       data: dataDetail,
-      recordPerPage:recordPerPage,
+      recordPerPage:recordPerPage, 
       pageNumber:pageNumber
     });
   } catch (err) {

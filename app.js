@@ -44,41 +44,22 @@ app.use((req, res, next) => {
 
 app.use("/api", apiRouter);
 
-// app.get("/", function (req, res) {
-//   res.sendFile("index.html");
-// });
-
 let RandomGenerateModel = require("./api/models/RandomGenerate_Model");
 let { Random_Generate,Type } = require("./api/helper/commonhelper");
-
-// io.on("connection", (socket) => {
-//   console.log("a user connected :D",socket.id);
-  
-//   socket.emit('socket_Id:',socket.id)
-//   socket.emit('gennerate_key',async function(){
-//     //setInterval(async() => {
-//       // let str = await  randomSave();
-//       //  console.log("gennerate_key =>",str);
-//        return "Key"
-//      //}, 2000);
-//   })
-// });
 
 io.on('connection', function(socket) {
   console.log("a user connected :D",socket.id);
   var str = randomSave();
-setInterval(async() => {
+  setInterval(async() => {
   str = await  randomSave();
   console.log("gennerate_key =>",str);
   io.sockets.emit('gennerate_key',{ gennerated_key:  str});
  }, 100000);
-  
+
    socket.on('disconnect', function () {
     console.log("a user disconnect :D",socket.id);
    });
 });
-
-
 
 async function randomSave() {
   let length = 14;
@@ -104,13 +85,14 @@ async function randomSave() {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
   };
  
- //mongodb 
+ //mongodb connection
  mongoose
   .connect(process.env.MONGO_URL,options)
   .then(() => {
     console.log("mongo connected");
   }); 
 
+  //server listen
 http.listen(process.env.PORT, () => {
   console.log("server started at ", process.env.PORT);
 });
