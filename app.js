@@ -11,8 +11,8 @@ app.use(express.static("public"));
 let http = require("http").createServer(app);
 let io = require("socket.io")(http, { 
   cors: {
-    origin: '*',
-    // origin: "http://localhost:4000",
+    // origin: '*',
+    origin: "http://localhost:4200",
     methods: ["GET", "POST"],
     allowedHeaders: ["Access-Control-Allow-Origin","*","Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"],
@@ -45,9 +45,9 @@ app.use((req, res, next) => {
 
 app.use("/api", apiRouter);
 
-// app.get("/", function (req, res) {
-//   res.sendFile("index.html");
-// });
+app.get("/", function (req, res) {
+  res.sendFile("index.html");
+});
 
 let RandomGenerateModel = require("./api/models/RandomGenerate_Model");
 let { Random_Generate,Type } = require("./api/helper/commonhelper");
