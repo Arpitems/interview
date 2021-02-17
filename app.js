@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 app.use("/api", apiRouter);
 
 // app.get("/", function (req, res) {
-//   res.redirect("index.html");
+//   res.sendFile("index.html");
 // });
 
 let RandomGenerateModel = require("./api/models/RandomGenerate_Model");
@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
   setInterval(() => {
     randomSave();
     console.log("Hello");
-  }, 200);
+  }, 2000);
 });
 
 async function randomSave() {
