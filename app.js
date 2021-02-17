@@ -11,10 +11,11 @@ app.use(express.static("public"));
 let http = require("http").createServer(app);
 let io = require("socket.io")(http, { 
   cors: {
-    origin: "http://localhost:4000",
+    origin: '*',
+    // origin: "http://localhost:4000",
     methods: ["GET", "POST"],
     allowedHeaders: ["Access-Control-Allow-Origin","*","Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization",],
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"],
     credentials: true
   }
 });
@@ -44,9 +45,9 @@ app.use((req, res, next) => {
 
 app.use("/api", apiRouter);
 
-app.get("/Test", function (req, res) {
-  res.sendFile("index.html");
-});
+// app.get("/", function (req, res) {
+//   res.redirect("index.html");
+// });
 
 let RandomGenerateModel = require("./api/models/RandomGenerate_Model");
 let { Random_Generate,Type } = require("./api/helper/commonhelper");
@@ -54,12 +55,12 @@ let { Random_Generate,Type } = require("./api/helper/commonhelper");
 io.on("connection", (socket) => {
   console.log("a user connected :D");
   setInterval(() => {
-    Test();
+    randomSave();
     console.log("Hello");
-  }, 1000000);
+  }, 200);
 });
 
-async function Test() {
+async function randomSave() {
   let length = 14;
   let generateString = await Random_Generate(length);
   let items = ['one', 'two', 'three'];
@@ -72,28 +73,17 @@ async function Test() {
   await random.save();
 }
 
-// test
-// setTimeout(function() {
-
+//option mongodb
   const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
-    // autoIndex: false, // Don't build indexes
-    // poolSize: 500, // Maintain up to 10 socket connections
     serverSelectionTimeoutMS: 50000, // Keep trying to send operations for 5 seconds
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-    // family: 4 // Use IPv4, skip trying IPv6
   };
-
-  // {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true, 
-  //   useFindAndModify: false,
-  //   useCreateIndex: true,
-  //   connectTimeoutMS: 1000
-  // }
+ 
+ //mongodb 
  mongoose
   .connect(process.env.MONGO_URL,options)
   .then(() => {
