@@ -2,15 +2,17 @@
 <head></head>
 
 <body>
-  <div id="message"></div>
-
+  <ul id="message"></ul>
   <script src="/socket.io/socket.io.js"></script>
   <script>
     var socket = io('http://localhost:4000');
 
-    socket.on('message', function(msg){
+    socket.on('gennerate_key', function(msg){
       console.log(msg);
-      document.getElementById("message").innerHTML = msg;
+      var node = document.createElement("LI");
+      var textnode = document.createTextNode(JSON.stringify(msg));
+      node.appendChild(textnode);
+      document.getElementById("message").appendChild(node);
     });
   </script>
   <h>R</h>

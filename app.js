@@ -11,8 +11,7 @@ app.use(express.static("public"));
 let http = require("http").createServer(app);
 let io = require("socket.io")(http, { 
   cors: {
-    // origin: '*',
-    origin: "http://localhost:4200",
+    origin: ["http://localhost","http://localhost:4200", "http://127.0.0.1:5501"],
     methods: ["GET", "POST"],
     allowedHeaders: ["Access-Control-Allow-Origin","*","Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"],
@@ -52,13 +51,34 @@ app.get("/", function (req, res) {
 let RandomGenerateModel = require("./api/models/RandomGenerate_Model");
 let { Random_Generate,Type } = require("./api/helper/commonhelper");
 
-io.on("connection", (socket) => {
-  console.log("a user connected :D");
-  setInterval(() => {
-    randomSave();
-    console.log("Hello");
-  }, 200000);
+// io.on("connection", (socket) => {
+//   console.log("a user connected :D",socket.id);
+  
+//   socket.emit('socket_Id:',socket.id)
+//   socket.emit('gennerate_key',async function(){
+//     //setInterval(async() => {
+//       // let str = await  randomSave();
+//       //  console.log("gennerate_key =>",str);
+//        return "Key"
+//      //}, 2000);
+//   })
+// });
+
+io.on('connection', function(socket) {
+  console.log("a user connected :D",socket.id);
+  var str = randomSave();
+setInterval(async() => {
+  str = await  randomSave();
+  console.log("gennerate_key =>",str);
+  io.sockets.emit('gennerate_key',{ gennerated_key:  str});
+ }, 100000);
+  
+   socket.on('disconnect', function () {
+    console.log("a user disconnect :D",socket.id);
+   });
 });
+
+
 
 async function randomSave() {
   let length = 14;
@@ -71,6 +91,7 @@ async function randomSave() {
     createdAt: new Date(),
   });
   await random.save();
+  return generateString;
 }
 
 //option mongodb
